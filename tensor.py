@@ -58,7 +58,7 @@ class Tensor:
             self.exp = np.dot(self.values,Tensor.values)
         else:
             print("The dimensions of the vectors don't match")
-    def _element_wise_add(self,Tensor)
+    def _element_wise_add(self,Tensor):
         """
         addition between 2 tensor with same shape
         """
