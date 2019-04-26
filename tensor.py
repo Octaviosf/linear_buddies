@@ -3,7 +3,7 @@ from numpy import linalg
 ### Class for tensor object
 
 class Tensor:
-    def __init__(self, dimension, values):
+    def __init__(self, dimension, values, color):
         """
         Initialize the tensor object with dimension and values
         """
@@ -21,7 +21,16 @@ class Tensor:
         except:
             raise Exception('Values should have similar structure to a {} tensor'.format(self.dimension))
 
+        try:
+            color = str(color)
+            if isinstance(color, str):
+                self.color = color
+            else:
+                raise Exception('Color should be a string.')
+        except:
+            raise Exception('Color should be a string')
         self.exp = self._calculate_exp()
+
 
     def _calculate_exp(self):
         """
