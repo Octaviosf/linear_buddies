@@ -24,12 +24,12 @@ class OneDim:
         print(V)
 
         plt.quiver(*origin, V[:, 0], V[:, 1], color=colors, angles='xy', scale_units='xy', scale=1)
-
         plt.show()
 
 
 
 def main():
+
     me = Tensor(1, [2, 2], 'red')
     bud1 = Tensor(1, [3, -5], 'green')
     bud2 = Tensor(1, [1, 3], 'blue')
