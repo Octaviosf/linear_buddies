@@ -49,9 +49,15 @@ class Tensor:
             self.exp = np.dot(self.values,Tensor.values)
         else:
             print("The dimensions of the vectors don't match")
-    def _element_wise_add(self,Tensor)
+    def _element_wise_add(self,Tensor):
         """
         addition between 2 tensor with same shape
         """
         if (self.dimension == Tensor.dimension) and (self.values.shape == Tensor.values.shape):
             self.values += a.values
+    def _eigen_decompose(self):
+        if self.dimension == 2:
+            eigen_vec,eigen_val = linalg.eig(self.values)
+            return eigen_vec,eigen_val
+        else:
+            return None
