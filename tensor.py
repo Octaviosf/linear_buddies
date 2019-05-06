@@ -30,8 +30,8 @@ class Tensor:
         except:
             raise Exception('Color should be a string')
         self.exp = self._calculate_exp()
-
-
+    def update_exp(self):
+        self.exp = round(self._calculate_exp(),5)
     def _calculate_exp(self):
         """
         Calculate exp based on different concepts based on the dimension of the tensor
@@ -49,16 +49,34 @@ class Tensor:
             return linalg.det(self.values)
         else:
             return -1
-
-    def _dot_product(self, Tensor):
+    def _cross_product(self,Tensor):
+        if self.dimension == 1:
+            self.exp = int(np.cross(self.values,Tensor.values))
+    def _dot_product(self,Tensor):
         """
         dot product between 2 vectors
         """
         if self.dimension == Tensor.dimension == 1:
-            self.exp = np.dot(self.values, Tensor.values)
+            self.exp = np.dot(self.values,Tensor.values)
         else:
             print("The dimensions of the vectors don't match")
-
+    def _element_wise_add(self,Tensor):
+        """
+        addition between 2 tensor with same shape
+        """
+        if (self.dimension == Tensor.dimension) and (self.values.shape == Tensor.values.shape):
+            self.values += Tensor.values
+            self.update_exp()
+    def _element_wise_multiply(self,Tensor):
+        if (self.dimension == Tensor.dimension) and (self.values.shape == Tensor.values.shape):
+            self.values = np.multiply(self.values,Tensor.values)
+            self.update_exp()
+    def _eigen_decompose(self):
+        if self.dimension == 2:
+            eigen_vec,eigen_val = linalg.eig(self.values)
+            return eigen_vec,eigen_val
+        else:
+            return None
     def scalar(self, c):
         """
         scalar multiplication of vector
@@ -67,10 +85,5 @@ class Tensor:
         """
 
         self.values = self.values * c
-
-    def _element_wise_add(self, Tensor):
-        """
-        addition between 2 tensor with same shape
-        """
-        if (self.dimension == Tensor.dimension) and (self.values.shape == Tensor.values.shape):
-            self.values += a.values
+    def multiply(self,bud):
+        self.values = self.values
