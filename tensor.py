@@ -50,27 +50,27 @@ class Tensor:
         else:
             return -1
 
-    def _dot_product(self,Tensor):
+    def _dot_product(self, Tensor):
         """
         dot product between 2 vectors
         """
         if self.dimension == Tensor.dimension == 1:
-            self.exp = np.dot(self.values,Tensor.values)
+            self.exp = np.dot(self.values, Tensor.values)
         else:
             print("The dimensions of the vectors don't match")
-<<<<<<< HEAD
+
+    def scalar(self, c):
+        """
+        scalar multiplication of vector
+        :param c: constant
+        :return: scaled tensor
+        """
+
+        self.values = self.values * c
+
     def _element_wise_add(self, Tensor):
-=======
-    def _element_wise_add(self,Tensor):
->>>>>>> 7ef237a6e37c274e04d30711fcfd94c0f6d916e8
         """
         addition between 2 tensor with same shape
         """
         if (self.dimension == Tensor.dimension) and (self.values.shape == Tensor.values.shape):
             self.values += a.values
-    def _eigen_decompose(self):
-        if self.dimension == 2:
-            eigen_vec,eigen_val = linalg.eig(self.values)
-            return eigen_vec,eigen_val
-        else:
-            return None
