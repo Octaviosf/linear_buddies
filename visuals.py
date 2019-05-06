@@ -3,16 +3,18 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from tensor import Tensor
+import copy
+
 
 class OneDim:
     def __init__(self, me, buds):
         # find max values for axes
-        tensors = buds
+        tensors = copy.deepcopy(buds)
         tensors.insert(0, me)
 
         max_ = 10
         for t in tensors:
-            temp_max = max(t.values)
+            temp_max = max(abs(t.values))
             if temp_max > 10:
                 max_ = temp_max + 0.2*temp_max
 
@@ -43,10 +45,11 @@ def main():
     me = Tensor(1, [2, 2], 'red')
     bud1 = Tensor(1, [3, -5], 'green')
     bud2 = Tensor(1, [1, 3], 'blue')
-    bud3 = Tensor(1, [-1, -4], 'magenta')
+    bud3 = Tensor(1, [-6, -4], 'magenta')
     buds = [bud1, bud2, bud3]
 
-    me.scalar(10)
+    # me.scalar(10)
+    me.multiply(bud3)
 
     one_D = OneDim(me, buds)
 
