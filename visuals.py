@@ -7,7 +7,7 @@ from tensor import Tensor
 import copy
 
 
-class OneDim:
+class OneDim1:
     def __init__(self, me, buds):
         # find max values for axes
         tensors = copy.deepcopy(buds)
@@ -31,10 +31,9 @@ class OneDim:
         plt.subplots_adjust(left=0.05, right=0.95, bottom=0.05, top=1.05)
 
         plt.xlim(-max_, max_)
-        plt.ylim(-max_, max_)
+        #plt.ylim(-max_, max_)
         plt.grid(True)
 
-        origin = [0], [0]
         bud1 = buds[0]
         bud2 = buds[1]
         bud3 = buds[2]
@@ -59,7 +58,42 @@ def setup(ax):
     ax.tick_params(which='minor', length=2.5)
     ax.set_xlim(0, 5)
     ax.set_ylim(0, 1)
-    ax.patch.set_alpha(0.0)
+    ax.patch.set_alpha(100.0)
+
+
+class OneDim2:
+    def __init__(self, me, buds):
+        # find max values for axes
+        tensors = copy.deepcopy(buds)
+        tensors.insert(0, me)
+
+        max_ = 10
+        for t in tensors:
+            temp_max = max(abs(t.values))
+            if temp_max > 10:
+                max_ = temp_max + 0.2*temp_max
+
+        # set figure
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+
+        plt.xlim(-max_, max_)
+        plt.ylim(-max_, max_)
+        plt.grid(True)
+
+        origin = [0], [0]
+        bud1 = buds[0]
+        bud2 = buds[1]
+        bud3 = buds[2]
+
+        V = np.array([me.values, bud1.values, bud2.values, bud3.values])
+
+        colors = [me.color, bud1.color, bud2.color, bud3.color]
+        print(V)
+
+        plt.quiver(*origin, V[:, 0], V[:, 1], color=colors, angles='xy', scale_units='xy', scale=1)
+        plt.show()
+
 
 
 class TwoDim:
@@ -104,7 +138,7 @@ def main1():
     bud3 = Tensor(1, [-4, 0], 'magenta')
     buds = [bud1, bud2, bud3]
 
-    one_D = OneDim(me, buds)
+    one_D = OneDim2(me, buds)
 
 
 def main2():
