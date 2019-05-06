@@ -6,11 +6,22 @@ from tensor import Tensor
 
 class OneDim:
     def __init__(self, me, buds):
+        # find max values for axes
+        tensors = buds
+        tensors.insert(0, me)
+
+        max_ = 10
+        for t in tensors:
+            temp_max = max(t.values)
+            if temp_max > 10:
+                max_ = temp_max + 0.2*temp_max
+
         # set figure
         fig = plt.figure()
         ax = fig.add_subplot(111)
-        plt.xlim(-8, 8)
-        plt.ylim(-8, 8)
+
+        plt.xlim(-max_, max_)
+        plt.ylim(-max_, max_)
         plt.grid(True)
 
         origin = [0], [0]
@@ -27,7 +38,6 @@ class OneDim:
         plt.show()
 
 
-
 def main():
 
     me = Tensor(1, [2, 2], 'red')
@@ -36,7 +46,10 @@ def main():
     bud3 = Tensor(1, [-1, -4], 'magenta')
     buds = [bud1, bud2, bud3]
 
+    me.scalar(10)
+
     one_D = OneDim(me, buds)
+
 
 main()
 
