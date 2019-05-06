@@ -14,7 +14,7 @@ class ZeroDim:
 
         max_ = 12
         for t in tensors:
-            temp_max = max(abs(t.values))
+            temp_max = np.amax(np.abs(t.values))
             if temp_max > 10:
                 max_ = temp_max + 0.2 * temp_max
 
@@ -37,7 +37,7 @@ class ZeroDim:
         bud2 = buds[1]
         bud3 = buds[2]
 
-        V = np.array([me.values, bud1.values, bud2.values, bud3.values])
+        V = np.array([[me.values, 0], [bud1.values, 0], [bud2.values, 0], [bud3.values, 0]])
         colors = [me.color, bud1.color, bud2.color, bud3.color]
 
         plt.scatter(V[:, 0], V[:, 1], color=colors)
@@ -133,10 +133,10 @@ class TwoDim:
 
 def main0():
 
-    me = Tensor(1, [2, 0], 'red')
-    bud1 = Tensor(1, [-5, 0], 'green')
-    bud2 = Tensor(1, [3, 0], 'blue')
-    bud3 = Tensor(1, [-4, 0], 'magenta')
+    me = Tensor(1, 2, 'red')
+    bud1 = Tensor(1, -5, 'green')
+    bud2 = Tensor(1, 3, 'blue')
+    bud3 = Tensor(1, -4, 'magenta')
     buds = [bud1, bud2, bud3]
 
     me.scalar(4)
